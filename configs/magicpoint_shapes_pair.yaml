@@ -15,8 +15,8 @@ data:
         resize: [120, 160]
     augmentation:
         photometric:
-            enable: true ## for class to recognize
-            enable_train: true
+            enable: false ## for class to recognize
+            enable_train: false
             enable_val: false
             primitives: [
                 'random_brightness', 'random_contrast', 'additive_speckle_noise',
@@ -44,7 +44,7 @@ data:
                 perspective_amplitude_y: 0.2
                 patch_ratio: 0.8
                 max_angle: 1.57  # 3.14
-                allow_artifacts: true
+                allow_artifacts: false
                 translation_overflow: 0.05
             valid_border_margin: 2
     warped_pair:
@@ -71,7 +71,7 @@ model:
     detector_loss:
         loss_type: 'softmax'
 
-    batch_size:  64 # 64
+    batch_size:  128 # 64
     eval_batch_size: 16
     learning_rate: 0.001
     kernel_reg: 0.
@@ -105,4 +105,5 @@ train_show_interval: 1000 # one show of the current training from to Tensorboard
 seed: 0
 
 # pretrained: 'logs/superpoint_syn_heat1_0/checkpoints/superPointNet_100000_checkpoint.pth.tar'
-
+# pretrained: "logs/magicpoint_synth/checkpoints/superPointNet_103273_checkpoint.pth.tar"
+# pretrained : "logs/superpoint_coco_heat2_0/checkpoints/superPointNet_170000_checkpoint.pth.tar"

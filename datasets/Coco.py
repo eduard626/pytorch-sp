@@ -65,9 +65,9 @@ class Coco(data.Dataset):
 
 
         sequence_set = []
-        # labels
+        # got labels?
         self.labels = False
-        if self.config['labels']:
+        if self.config['labels'] is not None:
             self.labels = True
             # from models.model_wrap import labels2Dto3D
             # self.labels2Dto3D = labels2Dto3D
@@ -96,12 +96,11 @@ class Coco(data.Dataset):
         pass
 
     def init_var(self):
+        # initialize some variables and methods for processing batches
         torch.set_default_tensor_type(torch.FloatTensor)
         from utils.homographies import sample_homography_np as sample_homography
-        from utils.utils import inv_warp_image
-        from utils.utils import compute_valid_mask
         from utils.photometric import ImgAugTransform, customizedTransform
-        from utils.utils import inv_warp_image, inv_warp_image_batch, warp_points
+        from utils.utils import inv_warp_image, inv_warp_image_batch, warp_points, compute_valid_mask
         
         self.sample_homography = sample_homography
         self.inv_warp_image = inv_warp_image
@@ -117,7 +116,9 @@ class Coco(data.Dataset):
         self.enable_homo_val = False
         self.enable_photo_val = False
 
+        # from paper
         self.cell_size = 8
+
         if self.config['preprocessing']['resize']:
             self.sizer = self.config['preprocessing']['resize']
 
@@ -163,6 +164,7 @@ class Coco(data.Dataset):
             image: tensor (H, W, channel=1)
         '''
         def _read_image(path):
+            # Reads from disk, resizes (if required), converts to gray and noramlizes to [0,1]
             cell = 8
             input_image = cv2.imread(path)
             # print(f"path: {path}, image: {image}")
@@ -285,7 +287,7 @@ class Coco(data.Dataset):
             input.update({'image': warped_img, 'valid_mask': valid_mask, 'image_2D':img_aug})
             input.update({'homographies': homographies, 'inv_homographies': inv_homographies})
 
-        # laebls
+        # labels
         if self.labels:
             pnts = np.load(sample['points'])['pts']
             # pnts = pnts.astype(int)
