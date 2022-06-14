@@ -1,6 +1,6 @@
 __pycache__/
-datasets/draw*
-datasets/synth*
-datasets/gaussian*
+datasets/draw*/
+datasets/synth*/
+datasets/gaussian*/
 runs/
-logs/magic*
+logs/magic*/
