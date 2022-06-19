@@ -21,5 +21,5 @@ jobs:
     #  run: yarn install && npm run-script build
 
     - name: Sync to S3 bucket
-      run: aws s3 sync ./configs s3://eduard626-github-bucket/ 
+      run: aws s3 sync . s3://eduard626-github-bucket/ 
       # --delete flag will remove any file in the s3 that are not on the "thefoldertodeploy" folder
