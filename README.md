@@ -2,6 +2,8 @@
 Tested with RTX3080, Cuda 11.6, Nvidia driver 510.54, Ubunutu 20.04.4 LTS
 Updated requirements.txt and pip requirements.
 
+
+
 # pytorch-superpoint
 
 This is a PyTorch implementation of  "SuperPoint: Self-Supervised Interest Point Detection and Description." Daniel DeTone, Tomasz Malisiewicz, Andrew Rabinovich. [ArXiv 2018](https://arxiv.org/abs/1712.07629).
